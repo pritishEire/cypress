@@ -1,56 +1,17 @@
-const today = new Date()
-
-describe('Buy Tickets Submission', () => {
-  it('should sucessfully search and cancel ticket bookings', () => {
-    cy.visit('https://www.cp.pt/passageiros/en/buy-tickets')
-
-    // Verify that the page has loaded by checking for a known element or text
-    //Why the timeout?
-    cy.location('pathname', { timeout: 60000 }).should(
-      'include',
-      '/buy-tickets'
-    )
-
-    //
-    cy.contains('Buy Tickets').should('exist')
-
-    //need test for autocomplete
-    cy.get('input[name="textBoxPartida"]').type('Lagos')
-
-    cy.get('input[name="textBoxChegada"]').type('Porto Campanha')
-
-    //date picker. Picking off UI but need test for the typing as well.,
-    // Get date 3 days from today
-    const dateIn3Days = getFutureDate(3)
-    cy.log(`Date in 3 days: ${dateIn3Days.day} ${dateIn3Days.month}`)
-
-    // Get date 5 days from today
-    const dateIn5Days = getFutureDate(5)
-    cy.log(`Date in 5 days: ${dateIn5Days.day} ${dateIn5Days.month}`)
-
-    //
-    selectDate1('datepicker-first', dateIn3Days.day, dateIn3Days.month)
-    //selectDate2('datepicker-second', dateIn5Days.day, dateIn5Days.month)
-    selectDate2('datepicker-second', 24, 'June')
-
-    // cy.get(`#datepicker-first`).click({ force: true })
-    // cy.get('.picker__nav--next[aria-controls="datepicker-first_table"]').click()
-    cy.get('input[type="submit"][value="Submit »"]').click()
-  })
-})
-
-function getFutureDate(daysFromToday: number): { day: number; month: string } {
-  const today = new Date()
-  const futureDate = new Date(today)
-  futureDate.setDate(today.getDate() + daysFromToday)
-
-  const day = futureDate.getDate()
-  const month = futureDate.toLocaleString('default', { month: 'long' }) // e.g., "May"
-
-  return { day, month }
+const pageElement = {
+  departureTextBox: 'input[name="textBoxPartida"]',
+  arrivalTextBox: 'input[name="textBoxChegada"]',
+  departureDatePicker: 'datepicker-first',
+  returnDatePicker: 'datepicker-second',
+  submitButton: 'input[type="submit"][value="Submit »"]',
+  monthOnCalendar: '.picker__month',
+  nextButtonDepartureCalendar:
+    '.picker__nav--next[aria-controls="datepicker-first_table"]',
+  nextButtonReturnCalendar:
+    '.picker__nav--next[aria-controls="datepicker-second_table"]',
+  dayOnCalendar: '.picker__day'
 }
-
-function selectDate1(
+function selectDate1w(
   datePickerId: string,
   targetDay: number,
   targetMonth: string
@@ -87,7 +48,7 @@ function selectDate1(
   cy.get(`.picker__day`).contains(targetDay).click()
 }
 
-function selectDate2(
+function selectDate2w(
   datePickerId: string,
   targetDay: number,
   targetMonth: string
