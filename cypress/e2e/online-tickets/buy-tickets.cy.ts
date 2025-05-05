@@ -30,12 +30,13 @@ describe('Buy Tickets Submission', () => {
 
     //
     selectDate1('datepicker-first', dateIn3Days.day, dateIn3Days.month)
-    //selectDate2('datepicker-second', dateIn5Days.day, dateIn5Days.month)
-    selectDate2('datepicker-second', 24, 'June')
+    selectDate2('datepicker-second', dateIn5Days.day, dateIn5Days.month)
 
     // cy.get(`#datepicker-first`).click({ force: true })
     // cy.get('.picker__nav--next[aria-controls="datepicker-first_table"]').click()
     cy.get('input[type="submit"]').click()
+
+    cy.intercept('POST', '/passageiros/en/buy-tickets').as('buyTicketsRequest')
 
     cy.origin('https://venda.cp.pt', () => {
       // All Cypress commands targeting venda.cp.pt go here
@@ -43,25 +44,46 @@ describe('Buy Tickets Submission', () => {
       // You can continue the booking flow here...
     })
 
-    cy.wait(9000)
-    cy.window().then((win) => {
-      // Access the page's window object
-      // Evaluate the JavaScript code to get the variable's value
-      const departValue = win.eval('departEscapeXml')
-      expect(departValue).to.equal('Lagos')
+    //cy.wait(9000)
+    cy.wait('@buyTicketsRequest').then((interception) => {
+      expect(interception.response?.statusCode).to.eq(200) // or whatever you expect
+      const responseBody = interception.response?.body
+      const formattedDate = formatDate(
+        dateIn3Days.day,
+        dateIn3Days.month,
+        dateIn3Days.year
+      )
+      const formattedDate2 = formatDate(
+        dateIn5Days.day,
+        dateIn5Days.month,
+        dateIn5Days.year
+      )
+      // Optional: assert something in the response
+      expect(responseBody).to.include("arrivalEscapeXml = 'Porto Campanha'")
+      expect(responseBody).to.include("departEscapeXml = 'Lagos'")
+      expect(responseBody).to.include(
+        `departDateEscapeXml = '${formattedDate}'`
+      )
+      expect(responseBody).to.include(
+        `returnDateEscapeXml = '${formattedDate2}'`
+      )
     })
   })
 })
 
-function getFutureDate(daysFromToday: number): { day: number; month: string } {
+function getFutureDate(daysFromToday: number): {
+  day: number
+  month: string
+  year: number
+} {
   const today = new Date()
   const futureDate = new Date(today)
   futureDate.setDate(today.getDate() + daysFromToday)
 
   const day = futureDate.getDate()
   const month = futureDate.toLocaleString('default', { month: 'long' }) // e.g., "May"
-
-  return { day, month }
+  const year = futureDate.getFullYear()
+  return { day, month, year }
 }
 
 function selectDate1(
@@ -143,4 +165,13 @@ function selectDate2(
     .find('.picker__day.picker__day--infocus') // Find the in-focus days within that picker
     .contains(targetDay)
     .click()
+}
+
+function formatDate(day: number, month: string, year: number): string {
+  const date = new Date(`${month} ${day}, ${year}`)
+  const yyyy = date.getFullYear()
+  const mm = String(date.getMonth() + 1).padStart(2, '0') // Months are zero-based
+  const dd = String(date.getDate()).padStart(2, '0')
+
+  return `${yyyy}-${mm}-${dd}`
 }

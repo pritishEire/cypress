@@ -1,13 +1,13 @@
 {
-    "compilerOptions": {
-      "target": "es6",
-      "lib": ["es6", "dom"],
-      "types": ["cypress"],
-      "moduleResolution": "node",
-      "module": "commonjs",
-      "esModuleInterop": true,
-      "strict": true,
-      "baseUrl": "./"
-    },
-    "include": ["cypress/**/*.ts"]
-  }
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": ["es2017", "dom"],
+    "types": ["cypress"],
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "strict": true,
+    "baseUrl": "./"
+  },
+  "include": ["cypress/**/*.ts"]
+}
