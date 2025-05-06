@@ -16,6 +16,9 @@ const pageElement = {
 }
 
 const URL = 'https://www.cp.pt/passageiros/en/buy-tickets'
+
+//ToDO - set up getter functions for page objects.
+//Since I wanted to just get the code ready and working
 export function visit() {
   cy.visit(URL)
 
@@ -62,8 +65,8 @@ export function selectDate(
       }
     })
 
-  cy.get(datePickerId) // Target the specific journey date picker
-    .find(pageElement.dayOnCalendar) // Find the in-focus days within that picker
+  cy.get(datePickerId)
+    .find(pageElement.dayOnCalendar)
     .contains(targetDay)
     .click()
 }

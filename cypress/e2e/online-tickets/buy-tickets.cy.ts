@@ -13,6 +13,9 @@ describe('Buy Tickets Submission', () => {
 
     const returnDate = getFutureDate(ticketData.returnDayFromToday)
 
+    //There needs to be tests for automcomplete and just typing the date instead of chosing.
+    //For this test, I am doing what a user wouldn't typically do. They would alway type a few letters before selecting from the automcomplete
+    //Especially - Porto Campanha. No one's spelling it right.
     buyTicketPage.enterTicketData(
       ticketData.from,
       ticketData.to,
@@ -25,6 +28,9 @@ describe('Buy Tickets Submission', () => {
 
     selectTrainPage.clickExit()
 
+    //This was the tricky bit, how do we test that the fields retain their values after user clicks cancel.
+    //Well, intercept the /passageiros/en/buy-tickets call
+    //and make sure certain variables are being set.
     cy.wait('@buyTicketsRequest').then((interception) => {
       expect(interception.response?.statusCode).to.eq(200) // or whatever you expect
       const responseBody = interception.response?.body
@@ -38,7 +44,6 @@ describe('Buy Tickets Submission', () => {
         returnDate.month,
         returnDate.year
       )
-      // Optional: assert something in the response
       expect(responseBody).to.include("arrivalEscapeXml = 'Porto Campanha'")
       expect(responseBody).to.include("departEscapeXml = 'Lagos'")
       expect(responseBody).to.include(
