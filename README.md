@@ -26,7 +26,9 @@ Additionally, Linter and Prettier were set up. [Source](https://medium.com/@begi
 - ```cypress/e2e``` - where the test files reside 
 - ```cypress/models``` - the data structor repository 
 - ```cypress/page-objects``` - POM files
-- '''.github/workflows''' - yamls for sclaing and CI 
+- ```.github/workflows``` - yamls for sclaing and CI
+
+I have added comments in the code where necessary to explain whys and why nots
 
 ## Observations about buy ticket page
 1. The [page](https://www.cp.pt/passageiros/en/buy-tickets) loads in a reasonable time. No fancy interactive modals, no login required, straight to the point. Even if the submission form was in any other language, one would have no troubles booking tickets.  
