@@ -56,6 +56,6 @@ There are multiple ways to tag the tests into various groups and run specific gr
 Feel free to run the test in the action tab of the repo. 
 
 ## Areas of improvment
-I am sure there are many, but lack of a mobile viewport test is a major one. Majority of the users will be on mobile. Easy to set up in cypress. I will set it up once I find time. 
+I am sure there are many, but lack of a mobile viewport test is a major one. Majority of the users will be on mobile. Easy to set up in cypress. To Do for me.  
 
 Cypress logging ```cy.log``` isn't leveraged much and I honestly don't find it much helpful in large complex tests. However can set up our own custom logging. Another to do for me. 
