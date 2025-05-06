@@ -33,10 +33,10 @@ I have added comments in the code where necessary to explain whys and why nots
 ## Observations about buy ticket page
 1. The [page](https://www.cp.pt/passageiros/en/buy-tickets) loads in a reasonable time. No fancy interactive modals, no login required, straight to the point. Even if the submission form was in any other language, one would have no troubles booking tickets.  
 2. However, there are few areas of improvement starting with hard to tell what the icons mean in mobile view.
- <img width="300" alt="image" src="https://github.com/user-attachments/assets/ef35b9ba-030b-4228-b1f4-179eefbea46e" />
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/ef35b9ba-030b-4228-b1f4-179eefbea46e" />
 
 4. The warnings (potential delays, cancellations etc) are tedious to go through on desktop than in mobile. In mobile view, all of them are listed, while in desktop you have to click through the carousel.
-   <img width="257" alt="image" src="https://github.com/user-attachments/assets/b7f0e44c-7234-49f4-87c1-ec15ec152214" />
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/b7f0e44c-7234-49f4-87c1-ec15ec152214" />
    
 6. Hard to navigate to children discount and other offers. Ideally, they should be listed right where the booking details are entered. 
 7. A tooltip would be mighty helpful as to what these options entail - Alfa Pendular, Intercidades, Regional, Urban 
