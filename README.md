@@ -22,10 +22,11 @@ Cypress for automation. TypeScript for better tooling and static typing.
 Additionally, Linter and Prettier were set up. [Source](https://medium.com/@beginners_log/set-up-linter-and-prettier-for-your-cypress-project-flat-config-a4af886f4101) ensuring no heated arguments about spaces vs tabs, or where to start the curly braces. Actually a big fan of this. You could set up checks on PRs to ensure the code wouldn't merge until the prettier issues are resolved. Infact can do those checks at commit using husky.  
 
 ## Directories
-- ```data``` - contains data holding ts files. Why ts and no json or txt? ts files allow for logic to be incorporated into the script for more complex data generation. 
-- ```e2e``` - where the test files reside 
-- ```models``` - the data structor repository 
-- ```page-objects``` - POM files
+- ```cypress/data``` - contains data holding ts files. Why ts and no json or txt? ts files allow for logic to be incorporated into the script for more complex data generation. 
+- ```cypress/e2e``` - where the test files reside 
+- ```cypress/models``` - the data structor repository 
+- ```cypress/page-objects``` - POM files
+- '''.github/workflows''' - yamls for sclaing and CI 
 
 ## Observations about buy ticket page
 1. The [page](https://www.cp.pt/passageiros/en/buy-tickets) loads in a reasonable time. No fancy interactive modals, no login required, straight to the point. Even if the submission form was in any other language, one would have no troubles booking tickets.  
