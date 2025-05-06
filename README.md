@@ -25,7 +25,8 @@ Additionally, Linter and Prettier were set up. [Source](https://medium.com/@begi
 - ```cypress/data``` - contains data holding ts files. Why ts and no json or txt? ts files allow for logic to be incorporated into the script for more complex data generation. 
 - ```cypress/e2e``` - where the test files reside 
 - ```cypress/models``` - the data structor repository 
-- ```cypress/page-objects``` - POM files
+- ```cypress/support/page-objects``` - POM files
+- ```cypress/support/helpers``` - utility methods. Mostly date fromatting here for this project.
 - ```.github/workflows``` - yamls for sclaing and CI
 
 I have added comments in the code where necessary to explain whys and why nots
